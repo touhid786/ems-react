@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { getEmployeeById, updateEmployeeById } from '../api/employeeApi'; // Import the API methods
-import '../styles/UpdateEmployee.css'; // Import the CSS for form styling
+import { getEmployeeById, updateEmployeeById } from '../api/employeeApi';
+import '../styles/UpdateEmployee.css';
 
 const UpdateEmployee = () => {
   const [formData, setFormData] = useState({
@@ -9,26 +9,28 @@ const UpdateEmployee = () => {
     email: '',
     salary: '',
   });
-  const [error, setError] = useState(null); // State to handle errors
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null); // State for success message
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleFetchEmployee = async () => {
     try {
       const employeeData = await getEmployeeById(formData.id);
       setFormData({
-        id: employeeData.id, // Ensure ID is also set
+        id: employeeData.id,
         name: employeeData.name,
-        email: employeeData.email, // Email should not be editable
+        email: employeeData.email,
         salary: employeeData.salary,
       });
-      setError(null); // Clear any previous errors
+      setError(null);
+      setSuccessMessage(null); // Clear any previous success message
     } catch (error) {
       setError('Error fetching employee data.');
-      console.error(error); // Log error for debugging
+      console.error(error);
     }
   };
 
@@ -37,13 +39,19 @@ const UpdateEmployee = () => {
     try {
       const updatedEmployee = await updateEmployeeById(formData.id, {
         name: formData.name,
+        email: formData.email,
         salary: formData.salary,
       });
-      console.log(updatedEmployee);
-      alert('Employee Updated:\n' + `ID: ${updatedEmployee.id}\nName: ${updatedEmployee.name}\nEmail: ${updatedEmployee.email}\nSalary: ${updatedEmployee.salary}`);
+      setSuccessMessage(`Employee Updated:
+        ID: ${updatedEmployee.id}
+        Name: ${updatedEmployee.name}
+        Email: ${updatedEmployee.email}
+        Salary: ${updatedEmployee.salary}`);
+      setError(null);
     } catch (error) {
       setError('Error updating employee data.');
-      console.error(error); // Log error for debugging
+      console.error(error);
+      setSuccessMessage(null); // Clear any previous success message
     }
   };
 
@@ -82,7 +90,7 @@ const UpdateEmployee = () => {
           id="email"
           name="email"
           value={formData.email}
-          readOnly // Make email read-only
+          readOnly
         />
         <label htmlFor="salary">Salary:</label>
         <input
@@ -98,7 +106,7 @@ const UpdateEmployee = () => {
         </button>
       </form>
 
-      {/* Display error message if any */}
+      {successMessage && <p className="success-message">{successMessage}</p>}
       {error && <p className="error-message">{error}</p>}
     </div>
   );

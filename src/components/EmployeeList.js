@@ -1,7 +1,6 @@
-    // src/components/EmployeeList.js
 import React, { useEffect, useState } from 'react';
-import { getAllEmployees } from '../api/employeeApi'; // Import the API function
-import '../styles/EmployeeList.css'; // Import the CSS for styling
+import { getAllEmployees } from '../api/employeeApi';
+import '../styles/EmployeeList.css';
 
 const EmployeeList = () => {
     const [employees, setEmployees] = useState([]); // State to hold employee data
@@ -29,6 +28,7 @@ const EmployeeList = () => {
                 <table className="employee-table">
                     <thead>
                         <tr>
+                            <th>ID</th> {/* Added ID column */}
                             <th>Name</th>
                             <th>Email</th>
                             <th>Salary</th>
@@ -37,6 +37,7 @@ const EmployeeList = () => {
                     <tbody>
                         {employees.map((employee) => (
                             <tr key={employee.id}>
+                                <td>{employee.id}</td> {/* Display employee ID */}
                                 <td>{employee.name}</td>
                                 <td>{employee.email}</td>
                                 <td>${employee.salary.toLocaleString()}</td>

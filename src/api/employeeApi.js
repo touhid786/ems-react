@@ -10,11 +10,11 @@ const BASE_URL = 'http://employee-managment-system.ap-south-1.elasticbeanstalk.c
 export const getAllEmployees = async () => {
     try {
         const response = await axios.get(BASE_URL);
-        console.log('Response data:', response.data); // Log the data field
-        return response.data.data; // Return the 'data' field that contains the employees
+        console.log('Response data:', response.data);
+        return response.data.data || response.data; // Adjust based on the actual structure of the API response
     } catch (error) {
         console.error('Error fetching employees:', error);
-        return [];
+        throw error; // Re-throw error to handle it in the component
     }
 };
 
@@ -26,8 +26,8 @@ export const getAllEmployees = async () => {
 export const getEmployeeById = async (id) => {
     try {
         const response = await axios.get(`${BASE_URL}/${id}`);
-        console.log(`getEmployeeById (${id}) response:`, response.data); // Log data
-        return response.data; // Return the employee data
+        console.log(`getEmployeeById (${id}) response:`, response.data);
+        return response.data.data || response.data; // Adjust based on the actual structure of the API response
     } catch (error) {
         console.error(`Error fetching employee with ID ${id}:`, error);
         throw error; // Re-throw error to handle it in the component
@@ -42,14 +42,13 @@ export const getEmployeeById = async (id) => {
 export const addEmployee = async (employeeData) => {
     try {
         const response = await axios.post(BASE_URL, employeeData);
-        console.log('Added employee data:', response.data); // Log the added employee data
-        return response.data; // Return the added employee data
+        console.log('Full API response:', response.data);
+        return response.data.data || response.data; // Adjust based on the actual structure of the API response
     } catch (error) {
         console.error('Error adding employee:', error);
         throw error; // Re-throw error to handle it in the component
     }
 };
-
 
 /**
  * Update an existing employee by ID.
@@ -60,15 +59,13 @@ export const addEmployee = async (employeeData) => {
 export const updateEmployeeById = async (id, employeeData) => {
     try {
         const response = await axios.put(`${BASE_URL}/${id}`, employeeData);
-        console.log(`updateEmployeeById (${id}) response:`, response.data); // Log data
-        return response.data; // Return the updated employee data
+        console.log(`updateEmployeeById (${id}) response:`, response.data);
+        return response.data.data || response.data; // Adjust based on the actual structure of the API response
     } catch (error) {
         console.error(`Error updating employee with ID ${id}:`, error);
         throw error; // Re-throw error to handle it in the component
     }
 };
-
-
 
 /**
  * Delete an employee by ID.

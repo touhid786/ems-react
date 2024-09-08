@@ -1,3 +1,5 @@
+/* src/styles/AddEmployee.css */
+
 .form-container {
     width: 300px;
     margin: 50px auto;
@@ -8,25 +10,25 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  h2 {
+  .form-container h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
   }
   
-  form {
+  .form-container form {
     display: flex;
     flex-direction: column;
   }
   
-  label {
+  .form-container label {
     margin: 10px 0 5px;
     font-weight: bold;
   }
   
-  input[type="text"],
-  input[type="email"],
-  input[type="number"] {
+  .form-container input[type="text"],
+  .form-container input[type="email"],
+  .form-container input[type="number"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -49,17 +51,14 @@
     background-color: #0056b3;
   }
   
-  /* Add this to AddEmployee.css */
-
-.success-message {
-    color: #28a745; /* Green color for success messages */
+  .success-message {
+    color: #28a745;
     margin-top: 20px;
     font-weight: bold;
   }
   
   .error-message {
-    color: #dc3545; /* Red color for error messages */
+    color: #dc3545;
     margin-top: 20px;
     font-weight: bold;
   }
-  

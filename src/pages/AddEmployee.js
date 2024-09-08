@@ -1,35 +1,43 @@
 // src/components/AddEmployee.js
 import React, { useState } from 'react';
-import { addEmployee } from '../api/employeeApi'; // Import the API function
-import '../styles/AddEmployee.css'; // Import the CSS for form styling
+import { addEmployee } from '../api/employeeApi';
+import '../styles/AddEmployee.css';
 
+/**
+ * AddEmployee component for adding new employees to the system.
+ * @returns {JSX.Element} The rendered form for adding an employee.
+ */
 const AddEmployee = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     salary: '',
   });
-  const [error, setError] = useState(null); // State to handle errors
-  const [successMessage, setSuccessMessage] = useState(null); // State to handle success messages
+
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Call API to add employee
       const addedEmployee = await addEmployee(formData);
-      console.log('Employee added:', addedEmployee);
-      setSuccessMessage(`Employee added successfully:\nName: ${addedEmployee.name}\nEmail: ${addedEmployee.email}\nSalary: ${addedEmployee.salary}`);
-      setError(null); // Clear any previous errors
-      setFormData({ name: '', email: '', salary: '' }); // Clear form data
+      console.log('Added Employee object:', addedEmployee); // Log the added employee object
+
+      setSuccessMessage(`Employee added successfully:
+        Name: ${addedEmployee.name}
+        Email: ${addedEmployee.email}
+        Salary: ${addedEmployee.salary}`);
+      setError(null);
+      setFormData({ name: '', email: '', salary: '' });
     } catch (error) {
       console.error('Error adding employee:', error);
-      setError('Error adding employee.');
-      setSuccessMessage(null); // Clear success message in case of error
+      setError('Error adding employee. Please try again.');
+      setSuccessMessage(null);
     }
   };
 
@@ -68,9 +76,7 @@ const AddEmployee = () => {
           Submit
         </button>
       </form>
-      {/* Display success message if available */}
       {successMessage && <p className="success-message">{successMessage}</p>}
-      {/* Display error message if any */}
       {error && <p className="error-message">{error}</p>}
     </div>
   );
