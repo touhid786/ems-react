@@ -1,0 +1,46 @@
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4; /* Light background color for the whole page */
+  }
+  
+  .box-container {
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .header {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .button-row {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .button-row button {
+    flex: 1;
+    margin: 0 10px;
+  }
+  
+  @media (max-width: 600px) {
+    .button-row {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .button-row button {
+      margin: 0;
+    }
+  }
+  

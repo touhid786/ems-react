@@ -1,0 +1,32 @@
+.custom-button {
+  padding: 10px 15px;
+  background-color: #007bff; /* Vibrant blue color */
+  color: #fff;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  outline: none; /* Removes the default browser outline */
+}
+
+.custom-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.custom-button:active {
+  background-color: #004085; /* Even darker blue on click */
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Slightly reduce shadow */
+  transform: translateY(0); /* Button comes back down on click */
+}
+
+.custom-button:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5); /* Custom focus ring with blue glow */
+}
